@@ -1,6 +1,9 @@
 package com.zipcodewilmington;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.IntStream;
 
 /**
  * Created by leon on 1/29/18.
@@ -147,8 +150,10 @@ public class StringArrayUtils {
      * @return array with identical contents excluding values of `value`
      */ // TODO
     public static String[] removeValue(String[] array, String valueToRemove) {
-
-        return null;
+        if (array == null) {
+            return null;
+        }
+        return Arrays.stream(array).filter(element -> !valueToRemove.equals(element)).toArray(String[]:: new);
     }
 
     /**
@@ -156,7 +161,18 @@ public class StringArrayUtils {
      * @return array of Strings with consecutive duplicates removes
      */ // TODO
     public static String[] removeConsecutiveDuplicates(String[] array) {
-        return null;
+        if (array == null || array.length == 0) {
+            return new String[0];
+        }
+        List<String> result = new ArrayList<>();
+        result.add(array[0]);
+
+        for (int i = 1; i < array.length; i++) {
+            if (!array[i].equals(array[i - 1])) {
+                result.add(array[i]);
+            }
+        }
+        return result.toArray(new String[0]);
     }
 
     /**
@@ -164,6 +180,7 @@ public class StringArrayUtils {
      * @return array of Strings with each consecutive duplicate occurrence concatenated as a single string in an array of Strings
      */ // TODO
     public static String[] packConsecutiveDuplicates(String[] array) {
+
         return null;
     }
 
