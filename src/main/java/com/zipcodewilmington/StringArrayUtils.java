@@ -1,5 +1,7 @@
 package com.zipcodewilmington;
 
+import java.util.Arrays;
+
 /**
  * Created by leon on 1/29/18.
  */
@@ -44,6 +46,9 @@ public class StringArrayUtils {
      * @return second to last element in specified array
      */ // TODO
     public static String getSecondToLastElement(String[] array) {
+        if (array != null && array.length > 1) {
+            return array[array.length - 2];
+        }
         return null;
     }
 
@@ -53,7 +58,15 @@ public class StringArrayUtils {
      * @return true if the array contains the specified `value`
      */ // TODO
     public static boolean contains(String[] array, String value) {
-        return false;
+        if (array == null || value == null ) {
+            return false;
+        }
+        for (String element : array) {
+            if (value.equals(element)) {
+                return true;
+            }
+        }
+        return  false;
     }
 
     /**
@@ -61,7 +74,13 @@ public class StringArrayUtils {
      * @return an array with identical contents in reverse order
      */ // TODO
     public static String[] reverse(String[] array) {
-        return null;
+        int length = array.length;
+        String[] reverseArray = new String[length];
+
+        for (int i = 0; i < length; i++) {
+            reverseArray[i] = array[length - i - 1];
+        }
+        return reverseArray;
     }
 
     /**
@@ -69,7 +88,12 @@ public class StringArrayUtils {
      * @return true if the order of the array is the same backwards and forwards
      */ // TODO
     public static boolean isPalindromic(String[] array) {
-        return false;
+        for (int i = 0; i < array.length; i++) {
+            if (!array[i].equals(array[array.length - 1 - i])) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
@@ -77,7 +101,25 @@ public class StringArrayUtils {
      * @return true if each letter in the alphabet has been used in the array
      */ // TODO
     public static boolean isPangramic(String[] array) {
-        return false;
+        if (array == null) {
+            return false;
+        }
+        boolean[] alphabet = new boolean[26];
+
+        for(String str : array) {
+            for (char c : str.toLowerCase().toCharArray()) {
+                if (Character.isAlphabetic(c)) {
+                    int index = c - 'a';
+                    alphabet[index] = true;
+                }
+            }
+        }
+        for (boolean isPresent : alphabet) {
+            if (!isPresent) {
+                return  false;
+            }
+        }
+        return true;
     }
 
     /**
@@ -86,7 +128,17 @@ public class StringArrayUtils {
      * @return number of occurrences the specified `value` has occurred
      */ // TODO
     public static int getNumberOfOccurrences(String[] array, String value) {
-        return 0;
+        if (array == null || value == null) {
+            return  0;
+        }
+        int count = 0;
+
+        for (String element : array) {
+            if (value.equals(element)) {
+                count++;
+            }
+        }
+        return count;
     }
 
     /**
@@ -95,6 +147,7 @@ public class StringArrayUtils {
      * @return array with identical contents excluding values of `value`
      */ // TODO
     public static String[] removeValue(String[] array, String valueToRemove) {
+
         return null;
     }
 
