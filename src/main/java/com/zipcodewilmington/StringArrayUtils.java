@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 /**
  * Created by leon on 1/29/18.
@@ -179,9 +180,23 @@ public class StringArrayUtils {
      * @param array array of chars
      * @return array of Strings with each consecutive duplicate occurrence concatenated as a single string in an array of Strings
      */ // TODO
-    public static String[] packConsecutiveDuplicates(String[] array) {
+    public static String[] packConsecutiveDuplicates(String[] array){
+        if (array == null || array.length == 0) {
+            return new String[0];
+        }
+        List<String> result = new ArrayList<>();
+        StringBuilder currentString = new StringBuilder(array[0]);
 
-        return null;
+        for (int i = 1; i < array.length; i++) {
+            if (!array[i].equals(array[i - 1])) {
+                currentString.append(array[i]);
+            } else {
+                result.add(currentString.toString());
+                currentString = new StringBuilder(array [i]);
+            }
+        }
+        result.add(currentString.toString());
+        return result.toArray(new String[0]);
     }
 
 
